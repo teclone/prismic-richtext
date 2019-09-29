@@ -1,33 +1,28 @@
-const path = require("path");
-const PrismicRichText = require(path.join(
-  __dirname,
-  "../",
-  "dist",
-  "prismic-richtext.min.js",
-));
-const chai = require("chai");
-const chaiSubset = require("chai-subset");
+const path = require('path');
+const PrismicRichText = require(path.join(__dirname, '../', 'dist', 'index.js'));
+const chai = require('chai');
+const chaiSubset = require('chai-subset');
 const expect = chai.expect;
 
 chai.use(chaiSubset);
 
-describe("Serialize", function() {
-  describe("fromRichText", function() {
-    it("provides an index to the serializer function", function() {
+describe('Serialize', function() {
+  describe('fromRichText', function() {
+    it('provides an index to the serializer function', function() {
       const richText = [
         {
-          type: "paragraph",
-          text: "P 1",
+          type: 'paragraph',
+          text: 'P 1',
           spans: [],
         },
         {
-          type: "list-item",
-          text: "L 1",
+          type: 'list-item',
+          text: 'L 1',
           spans: [],
         },
         {
-          type: "list-item",
-          text: "L 2",
+          type: 'list-item',
+          text: 'L 2',
           spans: [],
         },
       ];
@@ -40,7 +35,7 @@ describe("Serialize", function() {
         {
           index: 0,
           text: null,
-          children: [{ text: "P 1", children: [], index: 0 }],
+          children: [{ text: 'P 1', children: [], index: 0 }],
         },
         {
           index: 1,
@@ -51,7 +46,7 @@ describe("Serialize", function() {
               children: [
                 {
                   index: 0,
-                  text: "L 1",
+                  text: 'L 1',
                   children: [],
                 },
               ],
@@ -62,7 +57,7 @@ describe("Serialize", function() {
               children: [
                 {
                   index: 0,
-                  text: "L 2",
+                  text: 'L 2',
                   children: [],
                 },
               ],

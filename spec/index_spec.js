@@ -1,8 +1,7 @@
-const assert = require("assert");
-const stringify = require("json-stable-stringify");
-const asTree = require("../dist/prismic-richtext.js").asTree;
-const asSerializedTree = require("../dist/prismic-richtext.js")
-  .asSerializedTree;
+const assert = require('assert');
+const stringify = require('json-stable-stringify');
+const asTree = require('../dist/index.js').asTree;
+const asSerializedTree = require('../dist/index.js').asSerializedTree;
 
 function mockKeys(value) {
   return value.replace(/"(key)":"((\\"|[^"])+)"/g, `"key":"mockkey"`);
@@ -14,35 +13,35 @@ console.log(
       asTree(
         [
           {
-            type: "paragraph",
+            type: 'paragraph',
             text:
               "Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un peintre anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker. ",
             spans: [
               {
                 start: 19,
                 end: 29,
-                type: "hyperlink",
+                type: 'hyperlink',
                 data: {
-                  link_type: "Web",
-                  url: "http://google.fr",
+                  link_type: 'Web',
+                  url: 'http://google.fr',
                 },
               },
               {
                 start: 195,
                 end: 210,
-                type: "strong",
+                type: 'strong',
               },
               {
                 start: 422,
                 end: 435,
-                type: "em",
+                type: 'em',
               },
             ],
           },
           {
-            type: "image",
+            type: 'image',
             url:
-              "https://prismic-io.s3.amazonaws.com/prismic-apiv2-i18n/c8a0a4abda439ae4746bafac3c06edf0c5e3a3bd_toy_story_wallpaper_by_artifypics-d5gss19.jpg",
+              'https://prismic-io.s3.amazonaws.com/prismic-apiv2-i18n/c8a0a4abda439ae4746bafac3c06edf0c5e3a3bd_toy_story_wallpaper_by_artifypics-d5gss19.jpg',
             alt: null,
             copyright: null,
             dimensions: {
@@ -50,23 +49,23 @@ console.log(
               height: 600,
             },
             linkTo: {
-              id: "WRM47SYAACcAAFsR",
-              type: "test",
+              id: 'WRM47SYAACcAAFsR',
+              type: 'test',
               tags: [],
-              slug: "dummy-doc-for-documentlink",
-              lang: "en-us",
-              uid: "dummydoc",
-              link_type: "Document",
+              slug: 'dummy-doc-for-documentlink',
+              lang: 'en-us',
+              uid: 'dummydoc',
+              link_type: 'Document',
               isBroken: false,
             },
           },
         ],
         () => {
-          return "/mockurl";
-        },
-      ),
-    ),
-  ),
+          return '/mockurl';
+        }
+      )
+    )
+  )
 );
 
 // describe('Build generic tree from rich text', function () {
