@@ -1,33 +1,33 @@
-var webpack = require("webpack"),
-  path = require("path"),
-  yargs = require("yargs");
+var webpack = require('webpack'),
+  path = require('path'),
+  yargs = require('yargs');
 
-var libraryName = "PrismicRichtext",
-  fileName = "prismic-richtext",
+var libraryName = 'PrismicRichtextJsx',
+  fileName = 'index',
   plugins = [],
   outputFile,
   mode,
   optimization;
 
 if (yargs.argv.p) {
-  outputFile = fileName + ".min.js";
-  mode = "production";
+  outputFile = fileName + '.min.js';
+  mode = 'production';
   optimization = {
     minimize: true,
   };
 } else {
-  outputFile = fileName + ".js";
-  mode = "development";
+  outputFile = fileName + '.js';
+  mode = 'development';
 }
 
 var config = {
   mode: mode,
-  entry: [__dirname + "/src/index.ts"],
+  entry: [__dirname + '/src/index.ts'],
   output: {
-    path: path.join(__dirname, "/dist"),
+    path: path.join(__dirname, '/dist'),
     filename: outputFile,
     library: libraryName,
-    libraryTarget: "umd",
+    libraryTarget: 'umd',
     umdNamedDefine: true,
     globalObject: "typeof self !== 'undefined' ? self : this",
   },
@@ -35,33 +35,36 @@ var config = {
     rules: [
       {
         test: /\.ts$/,
-        loader: "babel-loader",
+        loader: 'babel-loader',
         options: {
           presets: [
-            ["@babel/preset-env", {
-              corejs: '3.0.0',
-              useBuiltIns: "entry",
-              targets: {
-                ie: "11"
-              }
-            }],
-            "@babel/typescript",
+            [
+              '@babel/preset-env',
+              {
+                corejs: '3.0.0',
+                useBuiltIns: 'entry',
+                targets: {
+                  ie: '11',
+                },
+              },
+            ],
+            '@babel/typescript',
           ],
           plugins: [
             [
-              "@babel/plugin-transform-modules-commonjs",
+              '@babel/plugin-transform-modules-commonjs',
               {
                 allowTopLevelThis: true,
               },
             ],
-            "ramda",
-          ]
+            'ramda',
+          ],
         },
       },
     ],
   },
   resolve: {
-    extensions: [".ts", ".js"],
+    extensions: ['.ts', '.js'],
   },
   plugins: plugins,
 };
