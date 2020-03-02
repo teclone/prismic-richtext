@@ -1,5 +1,5 @@
 const path = require('path');
-const PrismicRichText = require(path.join(__dirname, '../', 'dist', 'index.js'));
+const PrismicRichText = require(path.join(__dirname, '../', 'build', 'index.js'));
 const chai = require('chai');
 const chaiSubset = require('chai-subset');
 const expect = chai.expect;
@@ -66,7 +66,9 @@ describe('Tree', function() {
 
       expect(tree).to.containSubset(expectedTree);
       expect(tree.children.length).to.equal(expectedTree.children.length);
-      expect(tree.children[0].children.length).to.equal(expectedTree.children[0].children.length);
+      expect(tree.children[0].children.length).to.equal(
+        expectedTree.children[0].children.length,
+      );
     });
 
     it('Fusce commodo. Donec <strong>pos</strong><a><strong>uere</strong> <i>aug</i></a><i>ue</i> in quam.', function() {
@@ -115,9 +117,11 @@ describe('Tree', function() {
       expect(tree).to.containSubset(expectedTree);
 
       expect(tree.children.length).to.equal(expectedTree.children.length);
-      expect(tree.children[0].children.length).to.equal(expectedTree.children[0].children.length);
+      expect(tree.children[0].children.length).to.equal(
+        expectedTree.children[0].children.length,
+      );
       expect(tree.children[0].children[2].children.length).to.equal(
-        expectedTree.children[0].children[2].children.length
+        expectedTree.children[0].children[2].children.length,
       );
     });
 
@@ -158,9 +162,11 @@ describe('Tree', function() {
       expect(tree).to.containSubset(expectedTree);
 
       expect(tree.children.length).to.equal(expectedTree.children.length);
-      expect(tree.children[0].children.length).to.equal(expectedTree.children[0].children.length);
+      expect(tree.children[0].children.length).to.equal(
+        expectedTree.children[0].children.length,
+      );
       expect(tree.children[0].children[0].children.length).to.equal(
-        expectedTree.children[0].children[0].children.length
+        expectedTree.children[0].children[0].children.length,
       );
     });
 
@@ -219,12 +225,14 @@ describe('Tree', function() {
       expect(tree).to.containSubset(expectedTree);
 
       expect(tree.children.length).to.equal(expectedTree.children.length);
-      expect(tree.children[0].children.length).to.equal(expectedTree.children[0].children.length);
+      expect(tree.children[0].children.length).to.equal(
+        expectedTree.children[0].children.length,
+      );
       expect(tree.children[0].children[0].children.length).to.equal(
-        expectedTree.children[0].children[0].children.length
+        expectedTree.children[0].children[0].children.length,
       );
       expect(tree.children[0].children[0].children[1].children.length).to.equal(
-        expectedTree.children[0].children[0].children[1].children.length
+        expectedTree.children[0].children[0].children[1].children.length,
       );
     });
   });

@@ -1,6 +1,6 @@
 const chai = require('chai');
 const chaiSubset = require('chai-subset');
-const PrismicRichText = require('../dist/index.js');
+const PrismicRichText = require('../build/index.js');
 const expect = chai.expect;
 
 chai.use(chaiSubset);
@@ -41,7 +41,9 @@ describe('asText', function() {
     const result = PrismicRichText.asText(mock);
 
     it('should join blocks with one whitespace (default)', function() {
-      expect(result).to.equal('A > B <example>\n  TEST\n</example> This is bold and italic and both.');
+      expect(result).to.equal(
+        'A > B <example>\n  TEST\n</example> This is bold and italic and both.',
+      );
     });
   });
 
@@ -49,7 +51,9 @@ describe('asText', function() {
     const result = PrismicRichText.asText(mock, '\n');
 
     it('should join blocks with one line break', function() {
-      expect(result).to.equal('A > B\n<example>\n  TEST\n</example>\nThis is bold and italic and both.');
+      expect(result).to.equal(
+        'A > B\n<example>\n  TEST\n</example>\nThis is bold and italic and both.',
+      );
     });
   });
 });

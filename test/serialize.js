@@ -1,5 +1,5 @@
 const path = require('path');
-const PrismicRichText = require(path.join(__dirname, '../', 'dist', 'index.js'));
+const PrismicRichText = require(path.join(__dirname, '../', 'build', 'index.js'));
 const chai = require('chai');
 const chaiSubset = require('chai-subset');
 const expect = chai.expect;
