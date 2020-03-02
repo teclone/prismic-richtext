@@ -2,6 +2,9 @@
   "name": "@teclone/prismic-richtext",
   "version": "0.0.0-development",
   "description": "Convert Rich Text raw data to generic tree to simplify serialization, with ability to pass down parent node props to child nodes",
+  "publishConfig": {
+    "access": "public"
+  },
   "main": "build/index",
   "module": "build/esm/index",
   "typings": "build/index",
