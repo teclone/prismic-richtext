@@ -1,4 +1,4 @@
-import { flatten, init, last, sort } from "./helpers";
+import { flatten, init, last, sort } from './helpers';
 import {
   BlockNode,
   Boundaries,
@@ -9,10 +9,10 @@ import {
   OrderedListItemBlockNode,
   SpanNode,
   TextNode,
-} from "./nodes";
-import { RichTextBlock } from "./richtext";
-import { PRIORITIES } from "./types";
-import uuid from "./uuid";
+} from './nodes';
+import { RichTextBlock } from './richtext';
+import { PRIORITIES } from './types';
+import uuid from './uuid';
 
 export interface Group {
   elected: SpanNode;
@@ -30,25 +30,19 @@ interface PartitionedGroup {
 }
 
 function sortByPriorities(nodes: SpanNode[]): SpanNode[] {
-  return nodes.sort(
-    (nodeA: SpanNode, nodeB: SpanNode): number => {
-      if (nodeA.isParentOf(nodeB)) {
-        return -1;
-      } else if (nodeB.isParentOf(nodeA)) {
-        return 1;
-      } else {
-        const result = PRIORITIES[nodeA.type] - PRIORITIES[nodeB.type];
-        return result === 0 ? nodeA.text.length - nodeB.text.length : result;
-      }
-    },
-  );
+  return nodes.sort((nodeA: SpanNode, nodeB: SpanNode): number => {
+    if (nodeA.isParentOf(nodeB)) {
+      return -1;
+    } else if (nodeB.isParentOf(nodeA)) {
+      return 1;
+    } else {
+      const result = PRIORITIES[nodeA.type] - PRIORITIES[nodeB.type];
+      return result === 0 ? nodeA.text.length - nodeB.text.length : result;
+    }
+  });
 }
 
-function sliceNode(
-  text: string,
-  elected: SpanNode,
-  node: SpanNode,
-): SlicedNode {
+function sliceNode(text: string, elected: SpanNode, node: SpanNode): SlicedNode {
   if (node.start < elected.start) {
     return {
       inner: SpanNode.slice(node, elected.start, node.end, text),
@@ -92,9 +86,7 @@ function groupWith(
   return nodes.reduce<SpanNode[][]>((groups: SpanNode[][], node: SpanNode) => {
     const previousGroup = last(groups);
     if (previousGroup) {
-      const included = previousGroup.some((nodeGroup) =>
-        nodeGroup.isParentOf(node),
-      );
+      const included = previousGroup.some(nodeGroup => nodeGroup.isParentOf(node));
       if (included) {
         return init(groups).concat([previousGroup.concat(node)]);
       } else {
@@ -112,13 +104,9 @@ function groupWith(
 }
 
 function groupNodes(nodes: SpanNode[]): SpanNode[][] {
-  const sortByStart = (nodeA: SpanNode, nodeB: SpanNode) =>
-    nodeA.start - nodeB.start;
+  const sortByStart = (nodeA: SpanNode, nodeB: SpanNode) => nodeA.start - nodeB.start;
   const sortByEnd = (nodeA: SpanNode, nodeB: SpanNode) => nodeA.end - nodeB.end;
-  const sortedNodes = sort(
-    nodes,
-    (a, b) => sortByStart(a, b) || sortByEnd(a, b),
-  );
+  const sortedNodes = sort(nodes, (a, b) => sortByStart(a, b) || sortByEnd(a, b));
   return groupWith(
     (nodeA: SpanNode, nodeB: SpanNode) => nodeA.end >= nodeB.start,
     sortedNodes,
@@ -127,18 +115,14 @@ function groupNodes(nodes: SpanNode[]): SpanNode[][] {
 
 function electNode(candidates: SpanNode[]): Group {
   if (candidates.length === 0) {
-    throw new Error("Unable to elect node on empty list");
+    throw new Error('Unable to elect node on empty list');
   } else {
     const [elected, ...others] = sortByPriorities(candidates);
     return { elected, others };
   }
 }
 
-function fill(
-  text: string,
-  nodes: SpanNode[],
-  boundaries: Boundaries,
-): SpanNode[] {
+function fill(text: string, nodes: SpanNode[], boundaries: Boundaries): SpanNode[] {
   return nodes.reduce((acc: SpanNode[], node, index) => {
     let result: SpanNode[] = [];
     const fillStart = index === 0 && node.start > boundaries.lower;
@@ -195,14 +179,12 @@ function buildTree(text: string, nodes: SpanNode[]): SpanNode[] {
   const sortedNodes = sort(nodes, (a, b) => a.start - b.start);
   const groups: SpanNode[][] = groupNodes(sortedNodes);
   const postElection: Group[] = groups.map(electNode);
-  const tree = flatten(
-    postElection.map((group) => partitionGroup(text, group)),
-  );
+  const tree = flatten(postElection.map(group => partitionGroup(text, group)));
   return sort(tree, (a, b) => a.start - b.start);
 }
 
 function processTextBlock(block: RichTextBlock): SpanNode[] {
-  const nodes = (block.spans || []).map((span) => {
+  const nodes = (block.spans || []).map(span => {
     const text = block.text.slice(span.start, span.end);
     return new SpanNode(span.start, span.end, span.type, text, [], span);
   });
@@ -211,7 +193,6 @@ function processTextBlock(block: RichTextBlock): SpanNode[] {
 }
 
 export default class Tree {
-
   public static fromRichText(richText: RichTextBlock[]): Tree {
     return {
       key: uuid(),
@@ -237,25 +218,15 @@ export default class Tree {
             previousBlock &&
             previousBlock instanceof OrderedListBlockNode
           ) {
-            const orderedListItem = new OrderedListItemBlockNode(
-              block,
-              textNodes,
-            );
-            const updatedPreviousBlock = previousBlock.addChild(
-              orderedListItem,
-            );
+            const orderedListItem = new OrderedListItemBlockNode(block, textNodes);
+            const updatedPreviousBlock = previousBlock.addChild(orderedListItem);
             return init(acc).concat(updatedPreviousBlock);
           } else if (RichTextBlock.isListItem(block.type)) {
             const listItem = new ListItemBlockNode(block, textNodes);
-            const list = new ListBlockNode(RichTextBlock.emptyList(), [
-              listItem,
-            ]);
+            const list = new ListBlockNode(RichTextBlock.emptyList(), [listItem]);
             return acc.concat(list);
           } else if (RichTextBlock.isOrderedListItem(block.type)) {
-            const orderedListItem = new OrderedListItemBlockNode(
-              block,
-              textNodes,
-            );
+            const orderedListItem = new OrderedListItemBlockNode(block, textNodes);
             const orderedList = new OrderedListBlockNode(
               RichTextBlock.emptyOrderedList(),
               [orderedListItem],

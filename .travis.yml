@@ -3,13 +3,14 @@ notifications:
   email: false
 node_js:
   - '10'
+  - '12'
 script:
   - npm run build
   - npm run test
 jobs:
   include:
     - stage: release
-      node_js: '11'
+      node_js: '12'
       script:
         - npm run build
         - npm run test

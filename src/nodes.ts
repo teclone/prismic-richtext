@@ -2,7 +2,7 @@ import uuid from './uuid';
 import { NODE_TYPES } from './types';
 import { RichTextSpan, RichTextBlock } from './richtext';
 
-export type NodeElement = RichTextSpan | RichTextBlock; 
+export type NodeElement = RichTextSpan | RichTextBlock;
 
 export class Node {
   key: string;
@@ -29,12 +29,19 @@ export class SpanNode extends Node {
   text: string;
   children: SpanNode[];
 
-  constructor(start: number, end: number, type: string, text: string, children: SpanNode[], element: NodeElement) {
+  constructor(
+    start: number,
+    end: number,
+    type: string,
+    text: string,
+    children: SpanNode[],
+    element: NodeElement,
+  ) {
     super(type, element, children);
     this.start = start;
     this.end = end;
     this.text = text;
-    this.children = children;   
+    this.children = children;
   }
 
   boundaries(): Boundaries {
@@ -49,16 +56,29 @@ export class SpanNode extends Node {
   }
 
   setChildren(children: SpanNode[]): SpanNode {
-    return new SpanNode(this.start, this.end, this.type, this.text, children, this.element);
+    return new SpanNode(
+      this.start,
+      this.end,
+      this.type,
+      this.text,
+      children,
+      this.element,
+    );
   }
 
   static slice(node: SpanNode, start: number, end: number, text: string): SpanNode {
-    return new SpanNode(start, end, node.type, text.slice(start, end), node.children, node.element);
+    return new SpanNode(
+      start,
+      end,
+      node.type,
+      text.slice(start, end),
+      node.children,
+      node.element,
+    );
   }
 }
 
 export class TextNode extends SpanNode {
-
   constructor(start: number, end: number, text: string) {
     const element: RichTextSpan = {
       type: NODE_TYPES.span,
@@ -72,28 +92,24 @@ export class TextNode extends SpanNode {
 }
 
 export class BlockNode extends Node {
-
   constructor(type: string, block: RichTextBlock, children: BlockNode[] = []) {
     super(type, block, children);
   }
 }
 
 export class ListItemBlockNode extends BlockNode {
-
   constructor(block: RichTextBlock, children: SpanNode[]) {
     super(NODE_TYPES.listItem, block, children);
   }
 }
 
 export class OrderedListItemBlockNode extends BlockNode {
-
   constructor(block: RichTextBlock, children: SpanNode[]) {
     super(NODE_TYPES.oListItem, block, children);
   }
 }
 
 export class OrderedListBlockNode extends BlockNode {
-
   constructor(block: RichTextBlock, children: BlockNode[]) {
     super(NODE_TYPES.oList, block, children);
   }
@@ -105,7 +121,6 @@ export class OrderedListBlockNode extends BlockNode {
 }
 
 export class ListBlockNode extends BlockNode {
-
   constructor(block: RichTextBlock, children: BlockNode[]) {
     super(NODE_TYPES.list, block, children);
   }
