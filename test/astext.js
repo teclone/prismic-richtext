@@ -1,6 +1,6 @@
 const chai = require('chai');
 const chaiSubset = require('chai-subset');
-const PrismicRichText = require('../build/index.js');
+const { asText } = require('../build/index.js');
 const expect = chai.expect;
 
 chai.use(chaiSubset);
@@ -38,7 +38,7 @@ describe('asText', function() {
   ];
 
   context('applying mock object using default join string (undefined)', function() {
-    const result = PrismicRichText.asText(mock);
+    const result = asText(mock);
 
     it('should join blocks with one whitespace (default)', function() {
       expect(result).to.equal(
@@ -48,7 +48,7 @@ describe('asText', function() {
   });
 
   context('applying mock object and join string "\\n"', function() {
-    const result = PrismicRichText.asText(mock, '\n');
+    const result = asText(mock, '\n');
 
     it('should join blocks with one line break', function() {
       expect(result).to.equal(

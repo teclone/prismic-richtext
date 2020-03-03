@@ -1,5 +1,5 @@
 const path = require('path');
-const PrismicRichText = require(path.join(__dirname, '../', 'build', 'index.js'));
+const { serialize } = require(path.join(__dirname, '../', 'build', 'index.js'));
 const chai = require('chai');
 const chaiSubset = require('chai-subset');
 const expect = chai.expect;
@@ -30,7 +30,7 @@ describe('Serialize', function() {
         return { index, text, children };
       }
 
-      const serialized = PrismicRichText.serialize(richText, serializer);
+      const serialized = serialize(richText, serializer);
       expect(serialized).to.eql([
         {
           index: 0,

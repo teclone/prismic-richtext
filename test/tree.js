@@ -1,5 +1,5 @@
 const path = require('path');
-const PrismicRichText = require(path.join(__dirname, '../', 'build', 'index.js'));
+const { asTree } = require(path.join(__dirname, '../', 'build', 'index.js'));
 const chai = require('chai');
 const chaiSubset = require('chai-subset');
 const expect = chai.expect;
@@ -37,7 +37,7 @@ describe('Tree', function() {
         },
       ];
 
-      const tree = PrismicRichText.asTree(richText);
+      const tree = asTree(richText);
       const expectedTree = buildExpectedTree(richText, spans);
 
       expect(tree).to.containSubset(expectedTree);
@@ -54,7 +54,7 @@ describe('Tree', function() {
         },
       ];
 
-      const tree = PrismicRichText.asTree(richText);
+      const tree = asTree(richText);
 
       const expectedSpans = [
         { type: 'span', start: 0, end: 21 },
@@ -94,7 +94,7 @@ describe('Tree', function() {
         },
       ];
 
-      const tree = PrismicRichText.asTree(richText);
+      const tree = asTree(richText);
       const expectedSpans = [
         { type: 'span', start: 0, end: 21 },
         { type: 'strong', start: 21, end: 24 },
@@ -140,7 +140,7 @@ describe('Tree', function() {
         },
       ];
 
-      const tree = PrismicRichText.asTree(richText);
+      const tree = asTree(richText);
 
       const expectedSpans = [
         {
@@ -194,7 +194,7 @@ describe('Tree', function() {
         },
       ];
 
-      const tree = PrismicRichText.asTree(richText);
+      const tree = asTree(richText);
 
       const expectedSpans = [
         {

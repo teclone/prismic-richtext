@@ -3,6 +3,10 @@ import Tree from './tree';
 import Serialize from './serialize';
 import { NODE_TYPES } from './types';
 
-const asTree = Tree.fromRichText;
+export const Elements = NODE_TYPES;
 
-export default { Elements: NODE_TYPES, asText, asTree, serialize: Serialize };
+export { asText };
+
+export const asTree = Tree.fromRichText;
+
+export const serialize = Serialize;
