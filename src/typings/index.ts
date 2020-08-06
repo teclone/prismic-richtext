@@ -8,7 +8,7 @@ export type BlockNodeType =
   | 'heading5'
   | 'heading6'
   | 'paragraph'
-  | 'preformated'
+  | 'preformatted'
   | 'list-item'
   | 'o-list-item'
   | 'group-list-item'
