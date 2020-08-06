@@ -14,7 +14,7 @@ export const asTree = (richText: RichTextNodeProps[] = []) => {
       return acc;
     }
 
-    element.text = element.text.trim();
+    element.text = (element.text || '').trim();
 
     if (element.text) {
       const textNodes = processTextBlock(element);

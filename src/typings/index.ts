@@ -50,11 +50,11 @@ export interface RichTextSpanWithTextProps extends RichTextSpanProps {
 
 export interface RichTextBaseNodeProps {
   type: RichTextNodeType;
+  text: string;
 }
 
 export interface RichTextBlockNodeProps extends RichTextBaseNodeProps {
   type: BlockNodeType;
-  text: string;
   spans: RichTextSpanProps[];
 }
 
