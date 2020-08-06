@@ -23,3 +23,5 @@ export interface SpanElementProps extends BaseElementProps {
 }
 
 export type Element = BlockElementProps | EmptyBlockElementProps | SpanElementProps;
+
+export const elements = () => {};

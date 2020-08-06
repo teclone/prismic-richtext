@@ -74,3 +74,5 @@ export type RichTextNodeProps =
   | RichTextBlockNodeProps
   | RichTextImageNodeProps
   | RichTextOEmbedNodeProps;
+
+export const dummy1 = () => null;
