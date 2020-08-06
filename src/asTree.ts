@@ -3,7 +3,7 @@ import { processTextBlock } from './utils';
 import { RichTextNodeProps } from './typings';
 
 export const asTree = (richText: RichTextNodeProps[] = []) => {
-  return richText.reduce<Node[]>((acc, element, index) => {
+  return (richText || []).reduce<Node[]>((acc, element, index) => {
     if (element.type === 'embed' || element.type === 'image') {
       acc.push(new EmptyBlockNode(element.type, element));
       return acc;
