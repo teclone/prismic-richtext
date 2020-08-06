@@ -12,7 +12,7 @@ export const fillupSpans = (spans: RichTextSpanProps[], text: string) => {
     return {
       start,
       end,
-      text: text.substring(start, end),
+      text: text.substring(start, end).trim(),
       type,
       data,
     };
@@ -36,7 +36,7 @@ export const fillupSpans = (spans: RichTextSpanProps[], text: string) => {
       // skip it, this module assumes that there is only one formatting for a given range. formatting should never overlap.
       // the reason for is this, is that most use cases allow for this
     } else {
-      if (span.start !== prev.end) {
+      if (prev && span.start !== prev.end) {
         results.push(constructSpan('text', prev.end, span.start));
       }
       prev = constructSpan(span.type, span.start, span.end, span.data);

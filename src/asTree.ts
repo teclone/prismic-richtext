@@ -14,9 +14,9 @@ export const asTree = (richText: RichTextNodeProps[] = []) => {
       return acc;
     }
 
-    element.text = (element.text || '').trim();
+    element.text = element.text || '';
 
-    if (element.text) {
+    if (element.text.trim()) {
       const textNodes = processTextBlock(element);
 
       if (element.type === 'list-item' || element.type === 'o-list-item') {
