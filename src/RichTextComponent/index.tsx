@@ -1,9 +1,9 @@
 import React, { FunctionComponent } from 'react';
-import { RichTextProps } from '../typings';
 import { Serializer, serialize } from '../serialize';
+import { RichTextNodeProps } from '../typings';
 
 export interface RichTextComponentProps {
-  text: RichTextProps | string;
+  text: RichTextNodeProps[] | string;
   Component?: any;
   serializer: Serializer<any>;
   [p: string]: any;
