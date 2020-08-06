@@ -1,9 +1,13 @@
 const { config } = require('@teclone/rollup-all');
 module.exports = config({
-  config: {
-    moduleName: 'PrismicRichText',
-    distConfig: {
-      enabled: true,
-    },
+  config: {},
+  babelConfig: {
+    presetsConfig: {
+      presets: [
+        [
+          '@babel/preset-react'
+        ],
+      ],
+    }
   },
 });

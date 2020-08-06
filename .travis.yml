@@ -6,14 +6,12 @@ node_js:
   - '12'
 script:
   - npm run build
-  - npm run test
 jobs:
   include:
     - stage: release
       node_js: '12'
       script:
         - npm run build
-        - npm run test
       after_success:
         - npm run report-coverage
         - npm run semantic-release

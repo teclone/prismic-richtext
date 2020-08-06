@@ -1,8 +1,17 @@
-import { RichTextBlock } from './richtext';
+import { RichTextProps } from './typings/types';
 
-function asText(richtext: RichTextBlock[], joinString?: string | null | undefined) {
+export const asText = (
+  richtext: RichTextProps,
+  joinString?: string | null | undefined,
+) => {
   const join = typeof joinString === 'string' ? joinString : ' ';
-  return richtext.map((block) => block.text).join(join);
-}
-
-export default asText;
+  return richtext
+    .map((element) => {
+      if (element.type !== 'embed' && element.type !== 'image') {
+        return element.text;
+      }
+      return '';
+    })
+    .map((result) => result.trim())
+    .join(join);
+};

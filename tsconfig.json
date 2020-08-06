@@ -12,6 +12,8 @@
     "skipLibCheck": true,
     "noUnusedLocals": true,
     "noUnusedParameters": false,
+    "jsx": "react",
+    "allowSyntheticDefaultImports": true,
     "lib": ["dom", "es5", "es2015.collection", "es2015.iterable"]
   },
   "include": ["src"],
