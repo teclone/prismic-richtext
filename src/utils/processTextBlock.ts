@@ -1,4 +1,4 @@
-import { RichTextBlockNodeProps } from '../typings/types';
+import { RichTextBlockNodeProps } from '../typings';
 import { fillupSpans } from './fillupSpans';
 import { TextNode, SpanNode } from '../nodes';
 

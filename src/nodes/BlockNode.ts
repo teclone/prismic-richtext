@@ -1,5 +1,5 @@
 import { Node } from './Node';
-import { BlockNodeType } from '../typings/types';
+import { BlockNodeType } from '../typings';
 import { BlockElementProps } from '../typings/elements';
 
 export class BlockNode extends Node {

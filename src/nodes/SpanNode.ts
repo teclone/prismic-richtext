@@ -1,5 +1,5 @@
 import { Node } from './Node';
-import { SpanNodeType } from '../typings/types';
+import { SpanNodeType } from '../typings';
 import { SpanElementProps } from '../typings/elements';
 import { TextNode } from './TextNode';
 

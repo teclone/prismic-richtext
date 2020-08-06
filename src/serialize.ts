@@ -1,5 +1,5 @@
 import { Node } from './nodes';
-import { RichTextProps } from './typings/types';
+import { RichTextProps } from './typings';
 import { Element } from './typings/elements';
 import { asTree } from './asTree';
 

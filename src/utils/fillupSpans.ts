@@ -1,8 +1,4 @@
-import {
-  RichTextSpanProps,
-  RichTextSpanWithTextProps,
-  SpanNodeType,
-} from '../typings/types';
+import { RichTextSpanProps, RichTextSpanWithTextProps, SpanNodeType } from '../typings';
 
 export const fillupSpans = (spans: RichTextSpanProps[], text: string) => {
   const results: RichTextSpanWithTextProps[] = [];

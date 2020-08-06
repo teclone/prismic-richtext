@@ -1,5 +1,5 @@
 import { BlockNode, Node, EmptyBlockNode } from './nodes';
-import { RichTextProps } from './typings/types';
+import { RichTextProps } from './typings';
 import { processTextBlock } from './utils';
 
 export const asTree = (richText: RichTextProps = []) => {

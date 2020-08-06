@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from 'react';
-import { RichTextProps } from '../typings/types';
+import { RichTextProps } from '../typings';
 import { Serializer, serialize } from '../serialize';
 
 export interface RichTextComponentProps {

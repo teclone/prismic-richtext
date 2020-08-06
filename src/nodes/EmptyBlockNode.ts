@@ -1,4 +1,4 @@
-import { EmptyBlockNodeType } from '../typings/types';
+import { EmptyBlockNodeType } from '../typings';
 import { Node } from './Node';
 import { EmptyBlockElementProps } from '../typings/elements';
 

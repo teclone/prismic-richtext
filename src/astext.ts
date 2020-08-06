@@ -1,4 +1,4 @@
-import { RichTextProps } from './typings/types';
+import { RichTextProps } from './typings';
 
 export const asText = (
   richtext: RichTextProps,
