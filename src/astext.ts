@@ -1,7 +1,7 @@
-import { RichTextProps } from './typings';
+import { RichTextNodeProps } from './typings';
 
 export const asText = (
-  richtext: RichTextProps,
+  richtext: RichTextNodeProps[],
   joinString?: string | null | undefined,
 ) => {
   const join = typeof joinString === 'string' ? joinString : ' ';

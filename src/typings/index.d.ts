@@ -74,5 +74,3 @@ export type RichTextNodeProps =
   | RichTextBlockNodeProps
   | RichTextImageNodeProps
   | RichTextOEmbedNodeProps;
-
-export type RichTextProps = Array<RichTextNodeProps>;

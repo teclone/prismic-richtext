@@ -1,7 +1,7 @@
 import { Node } from './nodes';
-import { RichTextProps } from './typings';
 import { Element } from './typings/elements';
 import { asTree } from './asTree';
+import { RichTextNodeProps } from './typings';
 
 interface ParentNodeProps {
   [p: string]: any;
@@ -51,7 +51,7 @@ const serializeNode = <T>(
 };
 
 export const serialize = <T>(
-  richText: RichTextProps,
+  richText: RichTextNodeProps[],
 
   // user given serializer, if it returns undefined, then nothing is rendered, if it returns null, then the default serializer is called
   serializer: Serializer<T>,
