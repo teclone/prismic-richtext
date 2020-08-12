@@ -12,7 +12,7 @@ export const fillupSpans = (spans: RichTextSpanProps[], text: string) => {
     return {
       start,
       end,
-      text: text.substring(start, end).trim(),
+      text: text.substring(start, end),
       type,
       data,
     };
