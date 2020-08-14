@@ -23,7 +23,7 @@ export const asTree = (richText: RichTextNodeProps[] = []) => {
         let prev = acc[acc.length - 1];
         if (
           !prev ||
-          (prev.type !== 'group-list-item' && prev.type === 'group-o-list-item')
+          (prev.type !== 'group-list-item' && prev.type !== 'group-o-list-item')
         ) {
           prev = new BlockNode(`group-${element.type}` as any, {
             text: '',
