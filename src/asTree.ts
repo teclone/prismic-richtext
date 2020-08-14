@@ -31,7 +31,6 @@ export const asTree = (richText: RichTextNodeProps[] = []) => {
             spans: [],
           });
           acc.push(prev);
-          prev.addChild(new BlockNode(element.type, element, textNodes));
         }
         prev.addChild(new BlockNode(element.type, element, textNodes));
         return acc;
