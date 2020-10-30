@@ -12,7 +12,7 @@ export interface RichTextComponentProps {
 export const RichTextComponent: FunctionComponent<RichTextComponentProps> = ({
   text,
   serializer,
-  Component = 'div',
+  Component = React.Fragment,
   ...componentProps
 }) => {
   if (typeof text === 'string') {
