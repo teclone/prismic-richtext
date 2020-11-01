@@ -15,11 +15,13 @@ export const RichTextComponent: FunctionComponent<RichTextComponentProps> = ({
   Component = React.Fragment,
   ...componentProps
 }) => {
+  const props = Component !== React.Fragment ? componentProps : {};
+
   if (typeof text === 'string') {
-    return <Component {...componentProps}>{text}</Component>;
+    return <Component {...props}>{text}</Component>;
   } else {
     return (
-      <Component {...componentProps}>
+      <Component {...props}>
         {serialize(text, serializer, null, componentProps)}
       </Component>
     );
