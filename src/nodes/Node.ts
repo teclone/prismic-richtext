@@ -6,7 +6,7 @@ export class Node {
   children: Node[];
 
   constructor(type: ElementType, element: Element, children: Node[]) {
-    this.type = type;
+    this.type = type || 'paragraph';
     this.element = element;
     this.children = children;
   }
