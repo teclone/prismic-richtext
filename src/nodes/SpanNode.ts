@@ -5,6 +5,6 @@ import { TextNode } from './TextNode';
 
 export class SpanNode extends Node {
   constructor(type: SpanNodeType, text: string, element: SpanElementProps) {
-    super(type, element, [new TextNode(text)]);
+    super(element, [new TextNode(text)]);
   }
 }

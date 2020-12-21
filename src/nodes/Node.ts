@@ -5,8 +5,8 @@ export class Node {
   element: Element;
   children: Node[];
 
-  constructor(type: ElementType, element: Element, children: Node[]) {
-    this.type = type || 'paragraph';
+  constructor(element: Element, children: Node[]) {
+    this.type = element.type = element.type || 'paragraph';
     this.element = element;
     this.children = children;
   }

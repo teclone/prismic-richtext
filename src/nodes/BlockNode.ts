@@ -6,8 +6,8 @@ export class BlockNode extends Node {
   constructor(
     type: BlockNodeType,
     element: BlockElementProps,
-    children: BlockNode[] = [],
+    children: BlockNode[] = []
   ) {
-    super(type, element, children);
+    super(element, children);
   }
 }

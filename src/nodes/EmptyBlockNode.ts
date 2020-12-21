@@ -4,6 +4,6 @@ import { EmptyBlockElementProps } from '../typings/elements';
 
 export class EmptyBlockNode extends Node {
   constructor(type: EmptyBlockNodeType, element: EmptyBlockElementProps) {
-    super(type, element, []);
+    super(element, []);
   }
 }
