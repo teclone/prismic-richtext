@@ -1,5 +1,4 @@
 import { Node } from './nodes';
-import { Element } from './typings/elements';
 import { asTree } from './asTree';
 import { RichTextNodeProps } from './typings';
 
@@ -8,10 +7,10 @@ interface ParentNodeProps {
 }
 
 export type Serializer<T> = (
-  element: Element,
+  node: Node,
   children: T[],
   index: number,
-  parentNodeProps: ParentNodeProps,
+  parentNodeProps: ParentNodeProps
 ) => T;
 
 const serializeNode = <T>(
@@ -19,18 +18,18 @@ const serializeNode = <T>(
   parentNode: Node,
   serializer: Serializer<T>,
   defaultSerializer?: Serializer<T>,
-  parentNodeProps: ParentNodeProps = {},
+  parentNodeProps: ParentNodeProps = {}
 ): T => {
   function step(node: Node, idx: number): T {
     const serializedChildren = node.children.reduce<T[]>(
       (acc: T[], current: Node, i: number) => {
         return acc.concat([step(current, i)]);
       },
-      [],
+      []
     );
 
     let serialized = serializer
-      ? serializer(node.element, serializedChildren, idx, parentNodeProps)
+      ? serializer(node, serializedChildren, idx, parentNodeProps)
       : null;
 
     if (serialized === undefined) {
@@ -42,7 +41,7 @@ const serializeNode = <T>(
     }
 
     if (defaultSerializer) {
-      return defaultSerializer(node.element, serializedChildren, idx, parentNodeProps);
+      return defaultSerializer(node, serializedChildren, idx, parentNodeProps);
     }
     return null;
   }
@@ -60,9 +59,15 @@ export const serialize = <T>(
   defaultSerializer?: Serializer<T>,
 
   // parent node props
-  parentNodeProps?: ParentNodeProps,
+  parentNodeProps?: ParentNodeProps
 ): T[] => {
   return asTree(richText).map((node: Node, index: number) => {
-    return serializeNode<T>(index, node, serializer, defaultSerializer, parentNodeProps);
+    return serializeNode<T>(
+      index,
+      node,
+      serializer,
+      defaultSerializer,
+      parentNodeProps
+    );
   });
 };
