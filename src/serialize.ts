@@ -1,28 +1,29 @@
 import { Node } from './nodes';
 import { asTree } from './asTree';
 import { RichTextNodeProps } from './typings';
+import { ReactElement } from 'react';
 
 interface ParentNodeProps {
   [p: string]: any;
 }
 
-export type Serializer<T> = (
+export type Serializer<P = ParentNodeProps> = (
   node: Node,
-  children: T[],
+  children: ReactElement,
   index: number,
-  parentNodeProps: ParentNodeProps
-) => T;
+  parentNodeProps: P
+) => ReactElement | null;
 
-const serializeNode = <T>(
+const serializeNode = <P>(
   index: number,
   parentNode: Node,
-  serializer: Serializer<T>,
-  defaultSerializer?: Serializer<T>,
-  parentNodeProps: ParentNodeProps = {}
-): T => {
-  function step(node: Node, idx: number): T {
-    const serializedChildren = node.children.reduce<T[]>(
-      (acc: T[], current: Node, i: number) => {
+  serializer: Serializer<P>,
+  defaultSerializer?: Serializer<P>,
+  parentNodeProps: P = {} as any
+) => {
+  function step(node: Node, idx: number) {
+    const serializedChildren = node.children.reduce(
+      (acc, current: Node, i: number) => {
         return acc.concat([step(current, i)]);
       },
       []
@@ -49,20 +50,20 @@ const serializeNode = <T>(
   return step(parentNode, index);
 };
 
-export const serialize = <T>(
+export const serialize = <P>(
   richText: RichTextNodeProps[],
 
   // user given serializer, if it returns undefined, then nothing is rendered, if it returns null, then the default serializer is called
-  serializer: Serializer<T>,
+  serializer: Serializer<P>,
 
   // default serializer, default serializer is used when the user serializer returns null.
-  defaultSerializer?: Serializer<T>,
+  defaultSerializer?: Serializer<P>,
 
   // parent node props
-  parentNodeProps?: ParentNodeProps
-): T[] => {
+  parentNodeProps?: P
+) => {
   return asTree(richText).map((node: Node, index: number) => {
-    return serializeNode<T>(
+    return serializeNode<P>(
       index,
       node,
       serializer,
